@@ -1,0 +1,8 @@
+jiwer
+evaluate 
+transformers
+pytesseract
+opencv-contrib-python
+numpy
+torch
+librosa
