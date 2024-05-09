@@ -6,6 +6,8 @@ import cv2
 from PIL import Image
 from evaluate import load
 import librosa
+from transformers.models.whisper.english_normalizer import BasicTextNormalizer
+
 
 asr = pipeline("automatic-speech-recognition", model="openai/whisper-base")
 wer = load("wer")
@@ -21,8 +23,6 @@ def extract_text(image):
     Raises:
         ValueError: If the input image is not a PIL Image object.
     """
-    if not isinstance(image, Image.Image):
-        raise ValueError("Invalid input. Image should be a PIL Image object.")
 
     result = pytesseract.image_to_data(image, output_type='dict')
     n_boxes = len(result['level'])
@@ -57,8 +57,6 @@ def draw_rectangle(image, x, y, w, h, color=(0, 0, 255), thickness=2):
     Raises:
         ValueError: If the input image is not a PIL Image object.
     """
-    if not isinstance(image, Image.Image):
-        raise ValueError("Invalid input. Image should be a PIL Image object.")
 
     image_array = np.array(image)
     image_array = cv2.cvtColor(image_array, cv2.COLOR_RGB2BGR)
@@ -93,7 +91,7 @@ def transcribe(audio):
     y /= np.max(np.abs(y))
 
     transcribed_text = asr(
-        {"sampling_rate": sr, "raw": y}, language="en")["text"]
+        {"sampling_rate": sr, "raw": y})["text"]
 
     return transcribed_text
 
@@ -137,7 +135,11 @@ def match(refence, spoken):
 
     if spoken == "":
         return 0
-    wer_score = wer.compute(references=[refence], predictions=[spoken])
+    normalizer = BasicTextNormalizer()
+    spoken = clean_transcription(spoken)
+    predection = normalizer(spoken)
+    refence = normalizer(refence)
+    wer_score = wer.compute(references=[refence], predictions=[predection])
     score = 1 - wer_score
     return score
 
@@ -199,9 +201,6 @@ def process_image(im, data):
     Raises:
         ValueError: If the input image is not a PIL Image object or if the data is not a dictionary.
     """
-    if not isinstance(im, Image.Image) or not isinstance(data, dict):
-        raise ValueError(
-            "Invalid input. Image should be a PIL Image object and data should be a dictionary.")
 
     im_array = np.array(im)
     hg, wg, _ = im_array.shape
@@ -244,9 +243,6 @@ def run(stream, image):
         raise ValueError(
             "Invalid input. Stream should be either a file path or a tuple of (sampling_rate, raw_audio).")
 
-    if not isinstance(image, Image.Image):
-        raise ValueError("Invalid input. Image should be a PIL Image object.")
-
     data = extract_text(image)
     im_text_ = [data[i]["text"] for i in range(len(data))]
     im_text = " ".join(im_text_)
@@ -255,10 +251,11 @@ def run(stream, image):
     im_array = np.array(Image.open(image))
     data2 = None
     for i in range(len(chunks)):
-        if match(chunks[i], trns_text) > 0.5:
+        print(match(chunks[i], trns_text))
+        if match(chunks[i], trns_text) >= 0.10:
             data2 = reindex_data(data, index[i], l)
             break
     if data2 is not None:
         return process_image(im_array, data2)
     else:
-        return im_array
+        return im_array 

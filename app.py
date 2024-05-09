@@ -13,7 +13,7 @@ demo2 = gr.Interface(
     run,
     [gr.Audio(sources=["upload"]), gr.Image(
         type="filepath", label="Image")],
-    gr.Image(type="pil", label="output Image")
+    [gr.Image(type="pil", label="output Image")]
 )
 with demo:
     gr.TabbedInterface([demo1, demo2],
