@@ -258,4 +258,4 @@ def run(stream, image):
     if data2 is not None:
         return process_image(im_array, data2)
     else:
-        return im_array 
+        return im_array
