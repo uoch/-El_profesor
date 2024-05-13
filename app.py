@@ -11,7 +11,7 @@ description = """
 
 **How to Use:**
 
-1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. Ensure your pronunciation is clear and matches the text.
+1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. 
 
 2. **Upload Recorded Audio**: After recording, upload the audio file containing your speech. This audio will be used to enhance text extraction from the image.
 
