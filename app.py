@@ -7,10 +7,21 @@ demo = gr.Blocks()
 
 title = "El_Professor"
 description = """
-Demo for cascaded speech-to-speech translation (STST), mapping from source speech in any language to target speech in English. Demo uses OpenAI's [Whisper Base](https://huggingface.co/openai/whisper-base) model for speech translation, and Microsoft's
-[SpeechT5 TTS](https://huggingface.co/microsoft/speecht5_tts) model for text-to-speech:
-![Cascaded STST](https://huggingface.co/datasets/huggingface-course/audio-course-images/resolve/main/s2st_cascaded.png "Digram of cascaded speech to speech translation")
+**El_Professor: Enhance Text Extraction from Images with Audio Transcription**
+
+**How to Use:**
+
+1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. Ensure your pronunciation is clear and matches the text.
+
+2. **Upload Recorded Audio**: After recording, upload the audio file containing your speech. This audio will be used to enhance text extraction from the image.
+
+3. **Upload Image**: Next, upload the image containing the text you want to extract. Ensure the text in the image is visible and clear.
+
+4. **Check Your Advancement**: Once both the audio and image are uploaded, the application processes them to enhance text extraction. The output will display the processed image with highlighted text regions, showing your advancement in aligning spoken words with written text.
+
+**Note:** This application aims to assist you in improving your ability to accurately transcribe spoken words from images. It may not provide perfect results in all cases, but it can help you track your progress and refine your transcription skills over time.
 """
+
 
 demo1 = gr.Interface(
     run,
@@ -46,15 +57,21 @@ demo3 = gr.ChatInterface(
         ),
     ],
 )
-demo4 = gr.Interface(fn=Qa,
-                     inputs=[gr.Image(
-                         type="filepath", label="Upload Image"),
-                         gr.Textbox(label="Question"),
-                         gr.Checkbox(label="Internet access")],
-                     outputs=[gr.Textbox(label="Answer"),
-                              gr.Textbox(label="Conversations", type="text")],
-                     title="Chatbot",
-                     description="")
+
+demo4 = gr.Interface(
+    fn=Qa,
+    inputs=[
+        gr.Image(type="filepath", label="Upload Document"),
+        gr.Textbox(label="Question"),
+        gr.Checkbox(label="Enable Internet Access")
+    ],
+    outputs=[
+        gr.Textbox(label="Answer"),
+        gr.Textbox(label="Conversations", type="text")
+    ],
+    title="Document-based Chatbot",
+    description="This chatbot allows you to upload a document and ask questions. It can provide answers based on the content of the document as well as access information from the internet if enabled."
+)
 with demo:
     gr.TabbedInterface([demo1, demo2, demo3, demo4], [
                        "Microphone", "Audio File", "general_Chatbot", "Document_Chatbot"])
