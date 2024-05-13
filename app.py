@@ -6,12 +6,12 @@ demo = gr.Blocks()
 
 
 title = "El_Professor"
-des = """
+description = """
 **El_Professor: Enhance Text Extraction from Images with Audio Transcription**
 
 **How to Use:**
 
-1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. 
+1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. .
 
 2. **Upload Recorded Audio**: After recording, upload the audio file containing your speech. This audio will be used to enhance text extraction from the image.
 
@@ -29,7 +29,7 @@ demo1 = gr.Interface(
         type="filepath", label="Image")],
     gr.Image(type="pil", label="output Image"),
     title=title,
-    description=des
+    description=description
 )
 demo2 = gr.Interface(
     run,
@@ -37,13 +37,13 @@ demo2 = gr.Interface(
         type="filepath", label="Image")],
     [gr.Image(type="pil", label="output Image")],
     title=title,
-    description=des,
+    description=description,
     examples=[["exemples/Beginning.wav", im], ["exemples/Middel.wav", im]]
 )
 demo3 = gr.ChatInterface(
     respond,
     additional_inputs=[
-        gr.Textbox(value="You are a friend Chatbot.",
+        gr.Textbox(value="You are a friendly Chatbot.",
                    label="System message"),
         gr.Slider(minimum=1, maximum=2048, value=512,
                   step=1, label="Max new tokens"),
