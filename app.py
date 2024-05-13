@@ -6,7 +6,7 @@ demo = gr.Blocks()
 
 
 title = "El_Professor"
-description = """
+des = """
 **El_Professor: Enhance Text Extraction from Images with Audio Transcription**
 
 **How to Use:**
@@ -29,7 +29,7 @@ demo1 = gr.Interface(
         type="filepath", label="Image")],
     gr.Image(type="pil", label="output Image"),
     title=title,
-    description=description
+    description=des
 )
 demo2 = gr.Interface(
     run,
@@ -37,7 +37,7 @@ demo2 = gr.Interface(
         type="filepath", label="Image")],
     [gr.Image(type="pil", label="output Image")],
     title=title,
-    description=description,
+    description=des,
     examples=[["exemples/Beginning.wav", im], ["exemples/Middel.wav", im]]
 )
 demo3 = gr.ChatInterface(
