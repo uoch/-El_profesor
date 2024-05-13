@@ -251,7 +251,6 @@ def run(stream, image):
     im_array = np.array(Image.open(image))
     data2 = None
     for i in range(len(chunks)):
-        print(match(chunks[i], trns_text))
         if match(chunks[i], trns_text) >= 0.10:
             data2 = reindex_data(data, index[i], l)
             break
