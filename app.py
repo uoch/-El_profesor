@@ -12,6 +12,7 @@ description = """
 **How to Use:**
 
 1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. .
+1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. .
 
 2. **Upload Recorded Audio**: After recording, upload the audio file containing your speech. This audio will be used to enhance text extraction from the image.
 
@@ -21,7 +22,7 @@ description = """
 
 **Note:** This application aims to assist you in improving your ability to accurately transcribe spoken words from images. It may not provide perfect results in all cases, but it can help you track your progress and refine your transcription skills over time.
 """
-im = "exemples/the-king-and-three-sisters-around-the-world-stories-for-children.png"
+im = "the-king-and-three-sisters-around-the-world-stories-for-children.png"
 
 demo1 = gr.Interface(
     run,
@@ -38,7 +39,7 @@ demo2 = gr.Interface(
     [gr.Image(type="pil", label="output Image")],
     title=title,
     description=description,
-    examples=[["exemples/Beginning.wav", im], ["exemples/Middel.wav", im]]
+    examples=[["Beginning.wav", im], ["Middels.wav", im]]
 )
 demo3 = gr.ChatInterface(
     respond,
