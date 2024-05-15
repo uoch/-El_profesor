@@ -11,8 +11,8 @@ description = """
 
 **How to Use:**
 
-1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. .
-1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image. .
+1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image.
+1. **Record Yourself**: Begin by recording yourself speaking the content that corresponds to the text in the image.
 
 2. **Upload Recorded Audio**: After recording, upload the audio file containing your speech. This audio will be used to enhance text extraction from the image.
 
@@ -76,7 +76,7 @@ demo4 = gr.Interface(
     description="This chatbot allows you to upload a document and ask questions. It can provide answers based on the content of the document as well as access information from the internet if enabled."
 )
 with demo:
-    gr.TabbedInterface([demo2, demo4, demo1, demo3], [
+    gr.TabbedInterface([demo2, demo4, demo1, demo3],[
                        "Audio File", " Document_Chatbot", " Microphone", "general_Chatbot"])
 if __name__ == "__main__":
     demo.launch()
