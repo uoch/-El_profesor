@@ -50,6 +50,15 @@ def extract_text(image):
 
 
 def strong_entities(question):
+    """
+    Extracts strong entities from the given question using a named entity recognition (NER) model.
+
+    Args:
+        question (str): The input question to extract strong entities from.
+
+    Returns:
+        list: A list of strong entities extracted from the question.
+    """
     nlp = pipeline("ner", model=model, tokenizer=tokenizer)
     ner_results = nlp(question)
     search_terms = []
@@ -69,6 +78,19 @@ def strong_entities(question):
 
 
 def wiki_search(question):
+    """
+    Searches Wikipedia for information related to the given question.
+
+    Args:
+        question (str): The question to search for.
+
+    Returns:
+        str: The extracted information from Wikipedia.
+
+    Raises:
+        Exception: If there is an error retrieving data from Wikipedia.
+    """
+
     search_terms = strong_entities(question)
     URL = "https://en.wikipedia.org/w/api.php"
     corpus = []
@@ -105,6 +127,23 @@ def wiki_search(question):
 
 
 def semantic_search(corpus, question):
+    """
+    Performs semantic search on a given corpus of documents using a pre-trained SentenceTransformer model.
+
+    Args:
+        corpus (list): A list of documents to search through.
+        question (str): The question to search for.
+
+    Returns:
+        tuple: A tuple containing the most similar document and its similarity score.
+
+    Example:
+        corpus = ["Document 1", "Document 2", "Document 3"]
+        question = "What is the capital of France?"
+        result = semantic_search(corpus, question)
+        print(result)
+        # Output: ("Document 2", 0.85)
+    """
     model = SentenceTransformer("all-MiniLM-L6-v2")
     question_embedding = model.encode(question)
 
@@ -135,6 +174,19 @@ def semantic_search(corpus, question):
 
 
 def dm(q, a, corpus, new_q, max_history_size=5):
+    """
+    Selects the best corpus based on the similarity between the new question and the history of questions and answers.
+
+    Args:
+        q (str): The previous question.
+        a (str): The previous answer.
+        corpus (str): The previous corpus.
+        new_q (str): The new question.
+        max_history_size (int, optional): The maximum number of history items to consider. Defaults to 5.
+
+    Returns:
+        str: The selected corpus based on the similarity.
+    """
 
     history = deque(maxlen=max_history_size)
     history.append({"question": q, "answer": a, "corpus": corpus})
@@ -158,6 +210,17 @@ def dm(q, a, corpus, new_q, max_history_size=5):
 
 
 def first_corp(data, question, botton=False):
+    """
+    Concatenates the given data with the question and returns the resulting corpus.
+
+    Args:
+        data (list): A list of dictionaries containing text data.
+        question (str): The question to be concatenated with the data.
+        botton (bool, optional): Specifies whether to include additional corpus from wiki_search. Defaults to False.
+
+    Returns:
+        str: The concatenated corpus.
+    """
 
     if botton:
         corpus = wiki_search(question)
@@ -172,6 +235,22 @@ def first_corp(data, question, botton=False):
 
 
 def Qa(image, new_q, internet_access=False):
+    """
+    Perform question-answering using the given image and new question.
+
+    Args:
+        image (str): The path to the image file.
+        new_q (str): The new question to be answered.
+        internet_access (bool, optional): Flag indicating whether internet access is available. 
+            Defaults to False.
+
+    Returns:
+        tuple: A tuple containing the answer to the new question and the conversation history.
+
+    Raises:
+        None
+
+    """
     old_q = ["how are you?"]
     old_a = ["I am fine, thank you."]
     im_text = extract_text(image)
