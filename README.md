@@ -3,7 +3,7 @@
 
 ## Installation
 * Clone this repository: `git clone https://github.com/uoch/El_profesor.git`
-* Access AirBnb directory: `cd El_profesor`
+* Access El_Profesor directory: `cd El_profesor`
 * Build the Docker Image: `docker build -t el_profesor .`
 * Run the Docker Container:  `docker run -p 7860:7860 -it my_image_name`
 * Access the application: `http://localhost:7860/`
