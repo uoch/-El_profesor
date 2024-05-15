@@ -10,11 +10,11 @@
 - #### Olso you can dircly run the app in the  haggingface space : [El_profesor](https://huggingface.co/spaces/chaouch/El_profesor)
 
 ## Examples
-![alt text](image-4.png)
+![alt text](im/image-1.png)
 
-![alt text](image-3.png)
+![alt text](im/image-3.png)
 
-![alt text](image-2.png)
+![alt text](im/image-2.png)
 ## Author
 Chaouch Thameur - [Github](https://github.com/uoch) - [Hugging Face](https://huggingface.co/chaouch) - [LinkedIn](https://www.linkedin.com/in/thameur-chaouch-8089b813a/)
 
