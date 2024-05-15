@@ -1,7 +1,7 @@
 import gradio as gr
-from recite_module import run
-from chatbot_module import respond
-from doc_bot import Qa
+from src.recite_module import run
+from src.chatbot_module import respond
+from src.doc_bot import Qa
 demo = gr.Blocks()
 
 
@@ -22,7 +22,7 @@ description = """
 
 **Note:** This application aims to assist you in improving your ability to accurately transcribe spoken words from images. It may not provide perfect results in all cases, but it can help you track your progress and refine your transcription skills over time.
 """
-im = "the-king-and-three-sisters-around-the-world-stories-for-children.png"
+im = "exemples/the-king-and-three-sisters-around-the-world-stories-for-children.png"
 
 demo1 = gr.Interface(
     run,
@@ -39,7 +39,7 @@ demo2 = gr.Interface(
     [gr.Image(type="pil", label="output Image")],
     title=title,
     description=description,
-    examples=[["Beginning.wav", im], ["Middels.wav", im]]
+    examples=[["exemples/Beginning.wav", im], ["exemples/Middels.wav", im]]
 )
 demo3 = gr.ChatInterface(
     respond,
