@@ -7,7 +7,7 @@
 * Build the Docker Image: `docker build -t el_profesor .`
 * Run the Docker Container:  `docker run -p 7860:7860 -it my_image_name`
 * Access the application: `http://localhost:7860/`
-- #### Also, you can directly run the app in the Hugging Face space: [El_profesor](https://huggingface.co/spaces/chaouch/El_profesor)
+- #### Also, you can directly run the app in the Hugging Face space: [El_profesor](https://huggingface.co/spaces/chaouch/El_profesor){:target="_blank"}
 
 ## Examples
 ![alt text](im/image-1.png)
